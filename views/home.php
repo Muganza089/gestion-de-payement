@@ -12,10 +12,10 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-md-6">
-                        <img src="/assets/images/image1.png" alt="Paiement des étudiants" class="img-fluid">
+                        <img src="assets/images/image1.png" alt="Paiement des étudiants" class="img-fluid">
                     </div>
                     <div class="col-md-6">
-                        <img src="/assets/images/image2.jpg" alt="Paiement des étudiants" class="img-fluid">
+                        <img src="assets/images/image2.jpg" alt="Paiement des étudiants" class="img-fluid">
                     </div>
                 </div>
             </div>

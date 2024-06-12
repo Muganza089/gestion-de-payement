@@ -56,25 +56,20 @@ class Etudiant extends Model {
         $stmt->execute(['matricule' => $matricule]);
         return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne un tableau associatif
     }
-    public function etudiantExists($matricule,$motdepasse){
-
-        $query = "SELECT * FROM etudiants WHERE matricule = :matricule AND motdepasse =:motdepasse";
+    public function etudiantExists($matricule, $motdepasse) {
+        $query = "SELECT * FROM etudiants WHERE matricule = :matricule AND motdepasse = :motdepasse";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute(["matricule"=> $matricule,"motdepasse"=> $motdepasse]);
+        $stmt->execute(['matricule' => $matricule, 'motdepasse' => $motdepasse]);
         $etudiant = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($etudiant=!null){
-            return true;
-        }else{
-            return false;
-        }
+        return $etudiant !== false; // Retourne true si l'étudiant existe, false sinon
     }
-    public function getIdEtudiant($matricule){
+
+    public function getIdEtudiant($matricule) {
         $query = "SELECT id FROM etudiants WHERE matricule = :matricule";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute(["matricule"=> $matricule]);
+        $stmt->execute(['matricule' => $matricule]);
         $etudiant = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $etudiant["id"];
-
+        return $etudiant['id'];
     }
 
   

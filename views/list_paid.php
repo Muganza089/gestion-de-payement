@@ -3,7 +3,7 @@
 <body>
     <?php require_once 'header.php'; ?>
     <div class="container">
-        <h2>Étudiants insolvables</h2>
+        <h2>Étudiants ayant payé</h2>
         <?php if (!empty($students)): ?>
             <table class="table">
                 <thead>
@@ -25,12 +25,14 @@
                             <td><?php echo htmlspecialchars($student['nom']); ?></td>
                             <td><?php echo htmlspecialchars($student['postnom']); ?></td>
                             <td><?php echo htmlspecialchars($student['promotion']); ?></td>
+                            <td><?php echo htmlspecialchars($student['tranche']); ?></td>
+                            <td><?php echo htmlspecialchars($student['montant']); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         <?php else: ?>
-            <p>Aucun étudiant insolvable jusque la.</p>
+            <p>Aucun étudiant n'a payé pour l'instant.</p>
         <?php endif; ?>
     </div>
 </body> 

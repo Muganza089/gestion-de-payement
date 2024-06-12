@@ -5,7 +5,7 @@
 <body>
     <div class="container mt-5">
         <ul>
-            <li><a href="index.php?action=searchStudent">Rechercher un étudiant</a></li>
+            <li><a href="index.php?action=searchBar">Rechercher un étudiant</a></li>
             <li><a href="index.php?action=listStudentsPaid">Étudiants ayant payé</a></li>
             <li><a href="index.php?action=listStudentsUnpaid">Étudiants n'ayant pas payé</a></li>
         </ul>

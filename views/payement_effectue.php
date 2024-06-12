@@ -1,9 +1,10 @@
 <?php require_once "head.php"; ?>
 <?php require_once "header.php"; ?>
 <body>
-
-                
-                <h2 class ="form-container form">Payement effectue avec succes</h2>
+<form method="post" action="index.php?action=searchStudent">
+    <input type="text" name="matricule" placeholder="Matricule de l'étudiant">
+    <button type="submit">Rechercher</button>
+</form>
                   
 </body>
 </html>
