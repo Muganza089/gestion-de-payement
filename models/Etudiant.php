@@ -1,5 +1,6 @@
 <?php
-require_once("../core/Model.php");
+require_once("./core/Model.php");
+
 
 class Etudiant extends Model {
     public function getAllEtudiants() {
@@ -49,12 +50,31 @@ class Etudiant extends Model {
         $stmt = $this->conn->prepare($query);
         return $stmt->execute(['id' => $id]);
     }
-
     public function getEtudiantByMatricule($matricule) {
         $query = "SELECT * FROM etudiants WHERE matricule = :matricule";
         $stmt = $this->conn->prepare($query);
         $stmt->execute(['matricule' => $matricule]);
-        return $stmt->fetchObject('Etudiant');
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne un tableau associatif
+    }
+    public function etudiantExists($matricule,$motdepasse){
+
+        $query = "SELECT * FROM etudiants WHERE matricule = :matricule AND motdepasse =:motdepasse";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute(["matricule"=> $matricule,"motdepasse"=> $motdepasse]);
+        $etudiant = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($etudiant=!null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function getIdEtudiant($matricule){
+        $query = "SELECT id FROM etudiants WHERE matricule = :matricule";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute(["matricule"=> $matricule]);
+        $etudiant = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $etudiant["id"];
+
     }
 
   

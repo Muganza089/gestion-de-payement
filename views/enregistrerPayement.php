@@ -1,13 +1,13 @@
-<?php require_once "head.php"; 
- session_start();
-?>
+<?php require_once "head.php"; ?>
+<?php require_once "header.php"; ?>
+
 
 <body>
 
                 <div class="form-container">
                 <h2>Enregistrer un paiement</h2>
-                <form action="../public/actions.php" class="form " method="post">
-                    <input type="hidden" name="action" value="createPayment">
+                <form action="index.php?action=createPayment" class="form " method="post">
+                    
                     <div class="form-group">
                         <label>Tranche:</label>
                         <input type="number" name="tranche" class="form-control" required>

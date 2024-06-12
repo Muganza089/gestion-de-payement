@@ -1,7 +1,8 @@
 <?php require_once "head.php"; ?>
+<?php require_once "header.php"; ?>
 <body>
 
-                <form action="../public/actions.php" method="post">
+                <form action="index.php" method="post">
                 <h2>Ajouter un étudiant</h2>
                     <input type="hidden" name="action" value="createEtudiant">
                     <div class="form-group">
