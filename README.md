@@ -1,1 +1,2 @@
 - FONCTIONNALITE NON FINIE : RECHERCHER ETUDIANT PAR MATRICULE
+- CORDONNEES DE L'ADMIN : user et mot de passe 1234( ca peut se changer dans la bdd )
