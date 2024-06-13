@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Gestion des paiements académiques</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <script src="assets/js/bootstrap.js"></script>
     <style>
         .form-container {
         display: flex;

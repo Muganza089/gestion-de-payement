@@ -12,9 +12,8 @@ class MainController extends Controller {
     }
 
     public function index() {
-        $etudiantModel = $this->model('Etudiant');
-        $data['etudiants'] = $etudiantModel->getAllEtudiants();
-        $this->view('main', $data);
+  
+        $this->view('home');
     }
 
     public function admin() {
@@ -131,8 +130,20 @@ class MainController extends Controller {
 
     public function connectAdmin() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nom = $_POST['nom'];
-            $motDePasse = $_POST['motDePasse'];
+            session_start();
+            if(isset($_POST['nom'] )&& isset($_POST['motDePasse']) ){
+                $nom = $_POST['nom'];
+                $motDePasse = $_POST['motDePasse'];
+              
+            $_SESSION['nom'] = $nom;
+            $_SESSION['motDePasse'] = $motDePasse;
+            }
+            if(isset($_SESSION['nom'])&&$_SESSION['$motDePasse']){
+                $nom = $_SESSION['nom'];
+                $motDePasse = $_SESSION['motDePasse'];
+            }
+    
+            
 
             $admin = new Admin();
             $vraiOUFaux = $admin->adminExists($nom, $motDePasse);
