@@ -40,7 +40,7 @@ class Etudiant extends Model {
     }
 
     public function createEtudiant($data) {
-        $query = "INSERT INTO etudiants SET matricule=:matricule, nom=:nom, postnom=:postnom, promotion=:promotion";
+        $query = "INSERT INTO etudiants SET matricule=:matricule, nom=:nom, postnom=:postnom, promotion=:promotion, motdepasse=:motdepasse";
         $stmt = $this->conn->prepare($query);
         return $stmt->execute($data);
     }

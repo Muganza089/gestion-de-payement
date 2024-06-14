@@ -21,6 +21,10 @@
                         <label>Promotion:</label>
                         <input type="text" name="promotion" class="form-control" required>
                     </div>
+                    <div class="form-group">
+                        <label>Mot de passe:</label>
+                        <input type="password" name="motdepasse" class="form-control" required>
+                    </div>
                     
                     <button type="submit" class="btn btn-success">Ajouter</button>
                 </form>

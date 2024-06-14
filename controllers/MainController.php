@@ -29,7 +29,8 @@ class MainController extends Controller {
                 'matricule' => $_POST['matricule'],
                 'nom' => $_POST['nom'],
                 'postnom' => $_POST['postnom'],
-                'promotion' => $_POST['promotion']
+                'promotion' => $_POST['promotion'],
+                'motdepasse' => $_POST['motdepasse']
             ];
             $etudiantModel->createEtudiant($data);
             $this->admin();
@@ -56,7 +57,7 @@ class MainController extends Controller {
                 ];
     
                 if ($payment->createPayment($data)) {
-                    $this->view('payement_effectue');
+                    $this->payement_effectue();
                 } else {
                     echo "Erreur lors de l'enregistrement du paiement.";
                 }
@@ -138,7 +139,7 @@ class MainController extends Controller {
             $_SESSION['nom'] = $nom;
             $_SESSION['motDePasse'] = $motDePasse;
             }
-            if(isset($_SESSION['nom'])&&$_SESSION['$motDePasse']){
+            if(isset($_SESSION['nom'])&&isset($_SESSION['$motDePasse'])){
                 $nom = $_SESSION['nom'];
                 $motDePasse = $_SESSION['motDePasse'];
             }
@@ -148,7 +149,7 @@ class MainController extends Controller {
             $admin = new Admin();
             $vraiOUFaux = $admin->adminExists($nom, $motDePasse);
             if ($vraiOUFaux) {
-                session_start();
+              
                 $id = $admin->getIdAdmin($nom);
                 $_SESSION['admin_id'] = $id;
                 $this->admin();
