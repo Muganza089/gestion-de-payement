@@ -33,7 +33,7 @@ class MainController extends Controller {
                 'motdepasse' => $_POST['motdepasse']
             ];
             $etudiantModel->createEtudiant($data);
-            $this->admin();
+            $this->view('etudiantAjoute');
         }
     }
 

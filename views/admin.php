@@ -49,7 +49,7 @@
 
 
             
-                <?php /*require_once "enregistrerPayement.php";*/?>
+              
         </div>
 
         
