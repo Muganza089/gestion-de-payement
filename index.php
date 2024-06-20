@@ -13,6 +13,8 @@ if (isset($_GET['action'])) {
 }
 
 switch ($action) {
+    case 'enregistrerPayement':
+        $controller->enregistrerPayement();
     case 'payement_effectue':
         $controller->payement_effectue();
     case 'createStudent':
@@ -55,8 +57,15 @@ switch ($action) {
     case 'adminDashboard':
         $controller->adminDashboard();
         break;
+    case 'portemonnaie':
+        $controller->portemonnaie();
+        break;
+     case 'addMoney':
+        $controller->addMoney();
+        break;
     default:
         $controller->home();
         break;
+    
 }
 ?>

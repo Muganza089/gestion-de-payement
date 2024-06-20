@@ -72,6 +72,31 @@ class Etudiant extends Model {
         return $etudiant['id'];
     }
 
+    public function addMoney($id, $amount) {
+        $query = "UPDATE etudiants SET porte_monnaie = porte_monnaie + :amount WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute(['amount' => $amount, 'id' => $id]);
+    }
+
+    public function deductMoney($id, $amount) {
+        $query = "UPDATE etudiants SET porte_monnaie = porte_monnaie - :amount WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute(['amount' => $amount, 'id' => $id]);
+    }
+
+    public function getEtudiantById($id) {
+        $query = "SELECT * FROM etudiants WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getAmountById($id) {
+        $query = "SELECT porte_monnaie FROM etudiants WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
   
 }
 ?>

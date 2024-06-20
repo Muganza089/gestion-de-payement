@@ -7,6 +7,10 @@ class MainController extends Controller {
     public function searchByMatricule(){
         $this->view('search');
     }
+    public function enregistrerPayement(){
+        $this->view('enregistrerPayement');
+        
+    }
     public function payement_effectue() {
         $this->view('payement_effectue');
     }
@@ -41,25 +45,58 @@ class MainController extends Controller {
         return $this->view('loginEtudiant');
     }
 
-    public function createPayment() {
+    public function portemonnaie() {
+        if (isset($_SESSION['etudiant_id'])) {
+            $etudiantModel = $this->model('Etudiant');
+            $etudiant = $etudiantModel->getEtudiantById($_SESSION['etudiant_id']);
+            $_SESSION['porte_monnaie'] = $etudiant['porte_monnaie'];
+            $this->view('portemonnaie');
+        } else {
+            echo "Veuillez vous connecter.";
+        }
+    }
+
+    public function addMoney() {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            session_start();
-            if (isset($_SESSION['etudiant_id'])) {
+            if (isset($_SESSION['etudiant_id']) && isset($_POST['amount'])) {
+                $amount = intval($_POST['amount']);
+                $etudiantModel = $this->model('Etudiant');
+                $etudiantModel->addMoney($_SESSION['etudiant_id'], $amount);
+                $_SESSION['porte_monnaie'] += $amount;
+                $this->portemonnaie();
+            } else {
+                echo "Erreur: Montant ou ID de l'étudiant manquant.";
+            }
+        }
+    }
+
+    public function createPayment() {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_SESSION['etudiant_id']) && isset($_POST['tranche']) && isset($_POST['montant'])) {
                 $etudiant_id = $_SESSION['etudiant_id'];
-                $tranche = $_POST['tranche'];
-                $montant = $_POST['montant'];
-    
-                $payment = new Payment();
-                $data = [
-                    'etudiant_id' => $etudiant_id,
-                    'tranche' => $tranche,
-                    'montant' => $montant
-                ];
-    
-                if ($payment->createPayment($data)) {
-                    $this->payement_effectue();
+                $tranche = htmlspecialchars($_POST['tranche']);
+                $montant = intval($_POST['montant']);
+
+                if ($_SESSION['porte_monnaie'] >= $montant) {
+                    $paymentModel = new Payment();
+                    $data = [
+                        'etudiant_id' => $etudiant_id,
+                        'tranche' => $tranche,
+                        'montant' => $montant
+                    ];
+
+                    if ($paymentModel->createPayment($data)) {
+                        $etudiantModel = $this->model('Etudiant');
+                        $etudiantModel->deductMoney($etudiant_id, $montant);
+                        $_SESSION['porte_monnaie'] -= $montant;
+                        $this->payement_effectue();
+                    } else {
+                        echo "Erreur lors de l'enregistrement du paiement.";
+                    }
                 } else {
-                    echo "Erreur lors de l'enregistrement du paiement.";
+                    echo "Fonds insuffisants dans le porte-monnaie.";
                 }
             } else {
                 echo "ID de l'étudiant introuvable.";
@@ -112,10 +149,13 @@ class MainController extends Controller {
             if ($etudiant->etudiantExists($matricule, $password)) {
                 session_start();
                 $id = $etudiant->getIdEtudiant($matricule);
+                $etudiant = $etudiant->getEtudiantById( $id );
+                
                 $_SESSION['etudiant_id'] = $id;
+                $_SESSION['etudiant'] = $etudiant;
 
-                // Rediriger vers la page de paiement
-                $this->view('enregistrerPayement');
+                
+                $this->portemonnaie();
             } else {
                 // Afficher un message d'erreur et rester sur la page de connexion
                 echo 'Matricule ou mot de passe incorrect';
