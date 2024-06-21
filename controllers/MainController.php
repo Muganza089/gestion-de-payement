@@ -46,6 +46,9 @@ class MainController extends Controller {
     }
 
     public function portemonnaie() {
+        if(!session_start()){
+            session_start();
+        }
         if (isset($_SESSION['etudiant_id'])) {
             $etudiantModel = $this->model('Etudiant');
             $etudiant = $etudiantModel->getEtudiantById($_SESSION['etudiant_id']);
@@ -96,7 +99,7 @@ class MainController extends Controller {
                         echo "Erreur lors de l'enregistrement du paiement.";
                     }
                 } else {
-                    echo "Fonds insuffisants dans le porte-monnaie.";
+                    $this->view('solde_insuffisant');
                 }
             } else {
                 echo "ID de l'étudiant introuvable.";

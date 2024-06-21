@@ -27,6 +27,25 @@
                 if(isset($_GET['action']) && ($_GET['action']=="createStudent")){
                     require_once ("adminBtn.php");
                 }
+               
+                //Etudiants actions
+
+                // if(isset($_GET["action"]) && ($_GET["action"]== "")){
+                //     require_once ("porteMonnaieBtn.php");
+                // }
+                if(isset($_GET["action"]) && ($_GET["action"]== "portemonnaie")){
+                    require_once ("porteMonnaieBtn.php");
+                }
+                if(isset($_GET["action"]) && ($_GET["action"]== "createPayment")){
+                    
+                    require_once ("porteMonnaieBtn.php");
+                }
+                if(isset($_GET["action"]) && ($_GET["action"]== "enregistrerPayement")){
+                    require_once ("porteMonnaieBtn.php");
+                }
+                if(isset($_GET["action"]) && ($_GET["action"]== "payementEffect")){
+                    require_once ("porteMonnaieBtn.php");
+                }
 
 
                 
