@@ -1,6 +1,7 @@
 <?php
 require_once "models/Etudiant.php";
 require_once "models/Admin.php";
+require_once './models/Tranche.php';
 require_once "models/Payment.php"; // Assurez-vous que le modèle Payment est inclus
 
 class MainController extends Controller {
@@ -8,7 +9,10 @@ class MainController extends Controller {
         $this->view('search');
     }
     public function enregistrerPayement(){
-        $this->view('enregistrerPayement');
+        $trancheModel = $this->model('Tranche');
+        $data['tranches'] = $trancheModel->getAllTranches();
+        
+        $this->view('enregistrerPayement',$data);
         
     }
     public function payement_effectue() {
@@ -22,8 +26,9 @@ class MainController extends Controller {
 
     public function admin() {
         $etudiantModel = $this->model('Etudiant');
+      
         $data['etudiants'] = $etudiantModel->getAllEtudiants();
-        $this->view('admin', $data);
+        $this->view('admin', $data,);
     }
 
     public function createEtudiant() {
@@ -46,9 +51,6 @@ class MainController extends Controller {
     }
 
     public function portemonnaie() {
-        if(!session_start()){
-            session_start();
-        }
         if (isset($_SESSION['etudiant_id'])) {
             $etudiantModel = $this->model('Etudiant');
             $etudiant = $etudiantModel->getEtudiantById($_SESSION['etudiant_id']);
@@ -60,19 +62,19 @@ class MainController extends Controller {
     }
 
     public function addMoney() {
-        session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_SESSION['etudiant_id']) && isset($_POST['amount'])) {
+            if (isset($_POST['etudiant_id']) && isset($_POST['amount'])) {
+                $etudiant_id = intval($_POST['etudiant_id']);
                 $amount = intval($_POST['amount']);
                 $etudiantModel = $this->model('Etudiant');
-                $etudiantModel->addMoney($_SESSION['etudiant_id'], $amount);
-                $_SESSION['porte_monnaie'] += $amount;
-                $this->portemonnaie();
+                $etudiantModel->addMoney($etudiant_id, $amount);
+                $this->view('rechargeReussi'); // ou une autre vue de confirmation
             } else {
                 echo "Erreur: Montant ou ID de l'étudiant manquant.";
             }
         }
     }
+    
 
     public function createPayment() {
         session_start();
@@ -94,6 +96,7 @@ class MainController extends Controller {
                         $etudiantModel = $this->model('Etudiant');
                         $etudiantModel->deductMoney($etudiant_id, $montant);
                         $_SESSION['porte_monnaie'] -= $montant;
+                        session_destroy();
                         $this->payement_effectue();
                     } else {
                         echo "Erreur lors de l'enregistrement du paiement.";
@@ -228,5 +231,25 @@ class MainController extends Controller {
         $data['admins'] = $adminModel->getAllAdmins();
         $this->view('adminDashboard', $data);
     }
+    public function updateTranche() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idtranche = $_POST['idtranche'];
+            $amounttranche = $_POST['amounttranche'];
+    
+            $trancheModel = new Tranche();
+            $data = [
+                'idtranche' => $idtranche,
+                'amounttranche' => $amounttranche
+            ];
+    
+            if ($trancheModel->updateTranche($data)) {
+                $this->view('misajourEffectuee');
+            } else {
+                echo "Erreur lors de la mise à jour du montant de la tranche.";
+            }
+        }
+    }
+    
+    
 }
 ?>

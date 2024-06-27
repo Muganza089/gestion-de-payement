@@ -13,6 +13,9 @@ if (isset($_GET['action'])) {
 }
 
 switch ($action) {
+    case 'updateTranche':
+        $controller->updateTranche();
+        break;
     case 'enregistrerPayement':
         $controller->enregistrerPayement();
     case 'payement_effectue':

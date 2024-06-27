@@ -20,17 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <h3>Recharger de l'argent</h3>
-                <form action="index.php?action=addMoney" class="form" method="post">
-                    <div class="form-group">
-                        <label>Montant:</label>
-                        <input type="number" name="amount" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-success mt-3">Recharger</button>
-                </form>
-             
-            </div>
+            
         </div>
         <div class="row">
             <div class="col offset-5">

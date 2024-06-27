@@ -7,15 +7,16 @@
         <form action="index.php?action=createPayment" class="form" method="post" id="paymentForm">
             <div class="form-group">
                 <label>Tranche:</label>
+
                 <select name="tranche" class="form-control" id="trancheSelect" required>
-                    <option value="1" data-amount="350">Tranche 1</option>
-                    <option value="2" data-amount="510">Tranche 2</option>
-                    <option value="3" data-amount="140">Tranche 3</option>
-                </select>
+                            <?php foreach ($data['tranches'] as $tranche): ?>
+                                <option value="<?= $tranche['idtranche'] ?>" data-amount="<?= $tranche['amounttranche'] ?>"><?= $tranche['nomtranche']?></option>
+                            <?php endforeach; ?>
+                        </select>
             </div>
             <div class="form-group">
                 <label>Montant:</label>
-                <input type="number" name="montant" id="montantInput" class="form-control" value="200" readonly required>
+                <input type="number" name="montant" id="montantInput" class="form-control" value="0" readonly required>
             </div>
             <button type="submit" class="btn btn-success">Enregistrer</button>
         </form>

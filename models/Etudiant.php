@@ -26,6 +26,7 @@ class Etudiant extends Model {
                     'nom' => $row['nom'],
                     'postnom' => $row['postnom'],
                     'promotion' => $row['promotion'],
+                    'year' => $row['year'],
                     'payments' => []
                 ];
             }
