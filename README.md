@@ -1,4 +1,5 @@
 - FONCTIONNALITE NON FINIE : RECHERCHER ETUDIANT PAR MATRICULE
 - CORDONNEES DE L'ADMIN : nom : admin et mot de passe : 1234( ca peut se changer dans la bdd )
 - le nom de la bdd gestion_frais.
-- Un attribut ajouté a la table etudiants. 
+- une table ajoutée (tranches)
+- L'année est automatique 
