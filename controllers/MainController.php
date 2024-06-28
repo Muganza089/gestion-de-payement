@@ -51,6 +51,7 @@ class MainController extends Controller {
     }
 
     public function portemonnaie() {
+      
         if (isset($_SESSION['etudiant_id'])) {
             $etudiantModel = $this->model('Etudiant');
             $etudiant = $etudiantModel->getEtudiantById($_SESSION['etudiant_id']);

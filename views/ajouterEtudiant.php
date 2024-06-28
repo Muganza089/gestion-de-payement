@@ -7,7 +7,7 @@
                     <input type="hidden" name="action" value="createEtudiant">
                     <div class="form-group">
                         <label>Matricule:</label>
-                        <input type="text" name="matricule" class="form-control" required>
+                        <input type="text" id="matricule" name="matricule" class="form-control" pattern=".{10,}" title="Le matricule doit comporter au moins 10 caractères" required>
                     </div>
                     <div class="form-group">
                         <label>Nom:</label>

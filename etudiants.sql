@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 20 juin 2024 à 21:05
+-- Généré le : ven. 28 juin 2024 à 23:58
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -34,15 +34,19 @@ CREATE TABLE `etudiants` (
   `postnom` varchar(100) NOT NULL,
   `promotion` varchar(50) NOT NULL,
   `motdepasse` varchar(255) NOT NULL,
-  `porte_monnaie` int(11) NOT NULL
+  `porte_monnaie` int(11) NOT NULL,
+  `year` int(4) NOT NULL DEFAULT year(curdate())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `etudiants`
 --
 
-INSERT INTO `etudiants` (`id`, `matricule`, `nom`, `postnom`, `promotion`, `motdepasse`, `porte_monnaie`) VALUES
-(3, '20MS353', 'israel Shindano', 'sdasd', 'dsasdf', '1234', 0);
+INSERT INTO `etudiants` (`id`, `matricule`, `nom`, `postnom`, `promotion`, `motdepasse`, `porte_monnaie`, `year`) VALUES
+(3, '20MS353', 'israel Shindano', 'sdasd', 'dsasdf', '1234', 6280, 2024),
+(29, '00000', 'kasongo', 'mukendi', 'bac3', '1234', 0, 2024),
+(30, '2222', 'kalala', 'mutombo', 'bac3', '1234', 0, 2024),
+(31, '2222', 'kabongo', 'mulenda', 'bac2', '1234', 0, 2024);
 
 --
 -- Index pour les tables déchargées
@@ -62,7 +66,7 @@ ALTER TABLE `etudiants`
 -- AUTO_INCREMENT pour la table `etudiants`
 --
 ALTER TABLE `etudiants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
