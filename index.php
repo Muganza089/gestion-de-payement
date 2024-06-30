@@ -45,6 +45,15 @@ switch ($action) {
     case 'listStudentsUnpaid':
         $controller->listStudentsUnpaid();
         break;
+    case 'listStudentsPaidThirdTranche':
+        $controller->listStudentsPaidThirdTranche();
+        break;
+    case 'listStudentsPaidFirstTranche':
+        $controller->listStudentsPaidFirstTranche();
+        break;
+    case 'listStudentsPaidSecondTranche':
+        $controller->listStudentsPaidSecondTranche();
+        break;
     case 'loginAdmin':
         $controller->loginAdmin();
         break;

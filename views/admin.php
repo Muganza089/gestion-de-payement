@@ -3,11 +3,29 @@
 
 <body>
     <div class="container mt-5">
-        <ul>
-            <li><a href="index.php?action=searchBar">Rechercher un étudiant</a></li>
-            <li><a href="index.php?action=listStudentsPaid">Étudiants ayant payé</a></li>
-            <li><a href="index.php?action=listStudentsUnpaid">Étudiants n'ayant pas payé</a></li>
-        </ul>
+
+          <div class="row">
+            <div class="col">
+            <a href="index.php?action=listStudentsPaid">Étudiants ayant payé</a>
+            </div>
+            <div class="col">
+            <a href="index.php?action=listStudentsPaidFirstTranche">Étudiants ayant payé la premiere tranche</a>
+            </div>
+            <div class="col">
+            <a href="index.php?action=listStudentsPaidSecondTranche">Étudiants ayant payé la deuxieme tranche</a>
+            </div>
+            <div class="col">
+            <a href="index.php?action=listStudentsPaidThirdTranche">Étudiants ayant payé la troisieme tranche</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+            <a href="index.php?action=listStudentsUnpaid">Étudiants n'ayant pas payé</a>
+            </div>
+          </div>
+     
+           
+        
 
         <div class="row">
             <div class="col-md-3">
@@ -81,12 +99,12 @@
                                         <td><?= $etudiant['nom'] ?></td>
                                         <td><?= $etudiant['postnom'] ?></td>
                                         <?php $dateInt = (int) $etudiant['year'];
-                                        $dateInt+=1;
+                                        $dateInt-=1;
                                         
                                         ?>
                                         <td><?= $etudiant['promotion'] ?></td>
                                  
-                                        <td><?= $etudiant['year']." - ".$dateInt ?></td>
+                                        <td><?= $dateInt." - ".$etudiant['year'] ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

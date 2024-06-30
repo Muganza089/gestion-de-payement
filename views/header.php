@@ -30,6 +30,15 @@
                 if(isset($_GET['action']) && ($_GET['action']=="addMoney")){
                     require_once ("adminBtn.php");
                 }
+                if(isset($_GET['action']) && ($_GET['action']=="listStudentsPaidFirstTranche")){
+                    require_once ("adminBtn.php");
+                }
+                if(isset($_GET['action']) && ($_GET['action']=="listStudentsPaidSecondTranche")){
+                    require_once ("adminBtn.php");
+                }
+                if(isset($_GET['action']) && ($_GET['action']=="listStudentsPaidThirdTranche")){
+                    require_once ("adminBtn.php");
+                }
                 //Etudiants actions
 
                 if(isset($_GET["action"]) && ($_GET["action"]== "")){

@@ -34,5 +34,36 @@ class Payment extends Model {
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getStudentsPaidFirstTranche() {
+        $sql = "
+            SELECT e.id, e.matricule, e.nom, e.postnom, e.promotion, p.tranche, p.montant
+            FROM etudiants e
+            INNER JOIN payments p ON e.id = p.etudiant_id
+            WHERE p.tranche = 1
+        ";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getStudentsPaidSecondTranche() {
+        $sql = "
+            SELECT e.id, e.matricule, e.nom, e.postnom, e.promotion, p.tranche, p.montant
+            FROM etudiants e
+            INNER JOIN payments p ON e.id = p.etudiant_id
+            WHERE p.tranche = 2
+        ";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getStudentsPaidThirdTranche() {
+        $sql = "
+            SELECT e.id, e.matricule, e.nom, e.postnom, e.promotion, p.tranche, p.montant
+            FROM etudiants e
+            INNER JOIN payments p ON e.id = p.etudiant_id
+            WHERE p.tranche = 3
+        ";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

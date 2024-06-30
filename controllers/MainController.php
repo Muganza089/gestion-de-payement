@@ -250,6 +250,23 @@ class MainController extends Controller {
             }
         }
     }
+
+    public function listStudentsPaidFirstTranche() {
+        $paymentModel = $this->model('Payment');
+        $students = $paymentModel->getStudentsPaidFirstTranche();
+        $this->view('list_paid_first_tranche', ['students' => $students]);
+    }
+
+    public function listStudentsPaidSecondTranche() {
+        $paymentModel = $this->model('Payment');
+        $students = $paymentModel->getStudentsPaidSecondTranche();
+        $this->view('list_paid_second_tranche', ['students' => $students]);
+    }
+    public function listStudentsPaidThirdTranche() {
+        $paymentModel = $this->model('Payment');
+        $students = $paymentModel->getStudentsPaidThirdTranche();
+        $this->view('list_paid_third_tranche', ['students' => $students]);
+    }
     
     
 }
